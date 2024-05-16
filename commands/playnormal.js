@@ -78,8 +78,8 @@ module.exports = {
               });
               const qembed = new EmbedBuilder()
         .setAuthor({
-        name: 'Adicionadas músicas do álbum à fila',
-        iconURL: 'https://cdn.discordapp.com/attachments/1156866389819281418/1157218651179597884/1213-verified.gif', 
+        name: 'Added album songs to queue',
+        iconURL: '', 
         url: ''
     })
         .setColor('#14bdff')
