@@ -23,7 +23,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
   name: "clear",
-  description: "Clears the music queue.",
+  description: "Limpar a fila de músicas.",
   permissions: "0x0000000000000800",
   options: [],
   voiceChannel: true,
@@ -32,11 +32,11 @@ module.exports = {
     
     try {
       if (!queue || !queue.playing) {
-        return interaction.reply({ content: '⚠️ No music playing!!', ephemeral: true });
+        return interaction.reply({ content: '⚠️ Nenhuma música tocando!!', ephemeral: true });
       }
 
       if (!queue.songs[0]) {
-        return interaction.reply({ content: '❌ Queue is empty!!', ephemeral: true });
+        return interaction.reply({ content: '❌ A fila está vazia!!', ephemeral: true });
       }
 
       await queue.stop(interaction.guild.id);
@@ -46,9 +46,9 @@ module.exports = {
         .setAuthor({
           name: 'Cleared List',
           iconURL: 'https://cdn.discordapp.com/attachments/1156866389819281418/1157314241393598585/4618-no-slides.png?ex=65182861&is=6516d6e1&hm=dac8fed5a18e1574485e833d4c017591c50f59d161e1bde7fed5f6a92543f951&',
-          url: 'https://discord.gg/FUEHs7RCqz'
+          url: ''
         })
-        .setDescription('**Queue cleared! Be Ready for a new musical journey.**')
+        .setDescription('**Fila limpa! Esteja pronto para uma nova jornada musical.**')
        
 
       interaction.reply({ embeds: [embed] });
