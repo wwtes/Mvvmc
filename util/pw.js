@@ -1,6 +1,6 @@
 const status = "AUTOMATIC";
-const botName = "🎸 MUSIC BOT";
-const rtxText = "RTX";
+const botName = "🎸 Mvvmc";
+const rtxText = "ww";
 const version = "Latest@ v3.6"; 
 const startTime = Date.now();
 
