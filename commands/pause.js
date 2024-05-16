@@ -40,8 +40,8 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor('#7645fe') 
         .setAuthor({
-          name: 'Música pausada',
-          iconURL: 'https://cdn.discordapp.com/attachments/1156866389819281418/1157296313013117049/8061-purple-pause-icon.png?ex=651817ae&is=6516c62e&hm=4596c9fab9d8b66de8b5215b2750572ced352eed67440a1134550b846b5693b9&',
+          name: 'Music paused',
+          iconURL: '',
           url: ''
         })
         .setDescription(success ? '**A música foi pausada por um momento!!**' : '❌ Command Error: Não foi possível pausar a música')
