@@ -69,7 +69,7 @@ module.exports = {
           .setColor('#d291fe')
           .setAuthor({
         name: 'Sua música! Suas regras!',
-        iconURL: 'https://cdn.discordapp.com/attachments/1156866389819281418/1157528025739563088/5657-volume-icon.png?ex=6518ef7b&is=65179dfb&hm=1797c2830537a28b5c6a57564517cc509146d02383a69fb4239d7b5d55aceeed&', 
+        iconURL: '', 
         url: ''
     })
           .setDescription(`**Ajustando o volume : ** **${vol}/${maxVol}**`);
