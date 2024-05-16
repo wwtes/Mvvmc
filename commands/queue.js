@@ -22,7 +22,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const db = require("../mongoDB");
 module.exports = {
   name: "queue",
-  description: "It shows you the queue list.",
+  description: "Ele mostra a lista de filas.",
   permissions: "0x0000000000000800",
   options: [],
   run: async (client, interaction) => {
@@ -30,8 +30,8 @@ module.exports = {
     try {
 
      const queue = client.player.getQueue(interaction.guild.id);
-      if (!queue || !queue.playing) return interaction.reply({ content: '⚠️ No music playing!!', ephemeral: true }).catch(e => { })
-      if (!queue.songs[0]) return interaction.reply({ content: '⚠️ Queue is empty!!', ephemeral: true }).catch(e => { })
+      if (!queue || !queue.playing) return interaction.reply({ content: '⚠️ Nenhuma música tocando!!', ephemeral: true }).catch(e => { })
+      if (!queue.songs[0]) return interaction.reply({ content: '⚠️ A fila está vazia!!', ephemeral: true }).catch(e => { })
 
       const trackl = []
       queue.songs.map(async (track, i) => {
@@ -72,7 +72,7 @@ module.exports = {
       const generateEmbed = async (start) => {
         let sayı = page === 1 ? 1 : page * kaçtane - kaçtane + 1
         const current = trackl.slice(start, start + kaçtane)
-        if (!current || !current?.length > 0) return interaction.reply({ content: '⚠️ Queue is empty!!', ephemeral: true }).catch(e => { })
+        if (!current || !current?.length > 0) return interaction.reply({ content: '⚠️ A fila está vazia!!', ephemeral: true }).catch(e => { })
         return new EmbedBuilder()
           .setTitle(`${interaction.guild.name}  Queue`)
           .setThumbnail(interaction.guild.iconURL({ size: 2048, dynamic: true }))
@@ -152,7 +152,7 @@ module.exports = {
           const embed = new EmbedBuilder()
             .setTitle('Command Timeout')
             .setColor(`#ecfc03`)
-            .setDescription('▶️ Execute the Queue command again!!')
+            .setDescription('▶️ Execute o comando Queue novamente!!')
           return interaction?.editReply({ embeds: [embed], components: [button] }).catch(e => { })
 
         })
