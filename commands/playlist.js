@@ -3,22 +3,22 @@ const db = require('../mongoDB');
 
 module.exports = {
   name: "playlist",
-  description: "Lets you manage Album commands.",
+  description: "Permite gerenciar comandos do álbum.",
   options: [
     {
       name: "create",
-      description: "Create an Album.",
+      description: "Crie um álbum.",
       type: ApplicationCommandOptionType.Subcommand,
       options: [
         {
           name: "name",
-          description: "Give a name for your Album",
+          description: "Dê um nome para o seu álbum",
           type: ApplicationCommandOptionType.String,
           required: true
         },
         {
           name: "public",
-          description: "Want to make it Public ? True 0r false",
+          description: "Quer torná-lo público? True 0r False",
           type: ApplicationCommandOptionType.Boolean,
           required: true
         }
@@ -26,12 +26,12 @@ module.exports = {
     },
     {
       name: "delete",
-      description: "Want to remove your Album ?",
+      description: "Deseja remover seu álbum ?",
       type: ApplicationCommandOptionType.Subcommand,
       options: [
         {
           name: "name",
-          description: "Write the name of your Album to delete.",
+          description: "Escreva o nome do seu álbum para excluir.",
           type: ApplicationCommandOptionType.String,
           required: true
         }
@@ -39,18 +39,18 @@ module.exports = {
     },
     {
       name: "add-music",
-      description: "It allows you to add songs to the Album.",
+      description: "Ele permite que você adicione músicas ao álbum.",
       type: ApplicationCommandOptionType.Subcommand,
       options: [
         {
           name: "playlist-name",
-          description: "Write an Album name.",
+          description: "Escreva o nome de um álbum.",
           type: ApplicationCommandOptionType.String,
           required: true
         },
         {
           name: "name",
-          description: "Write a song name or a song link.",
+          description: "Escreva o nome de uma música ou um link para uma música.",
           type: ApplicationCommandOptionType.String,
           required: true
         }
@@ -58,18 +58,18 @@ module.exports = {
     },
     {
       name: "delete-music",
-      description: "It allows you to delete song from Album.",
+      description: "Ele permite que você exclua uma música do álbum.",
       type: ApplicationCommandOptionType.Subcommand,
       options: [
         {
           name: "playlist-name",
-          description: "Write an Album name.",
+          description: "Escreva um nome de álbum.",
           type: ApplicationCommandOptionType.String,
           required: true
         },
         {
           name: "name",
-          description: "Write a song name.",
+          description: "Escreva o nome de uma música.",
           type: ApplicationCommandOptionType.String,
           required: true
         }
@@ -77,12 +77,12 @@ module.exports = {
     },
     {
       name: "list",
-      description: "Browse songs in an Album.",
+      description: "Procure músicas em um álbum.",
       type: ApplicationCommandOptionType.Subcommand,
       options: [
         {
           name: "name",
-          description: "Write an Album name.",
+          description: "Escreva o nome de um álbum.",
           type: ApplicationCommandOptionType.String,
           required: true
         }
@@ -90,13 +90,13 @@ module.exports = {
     },
     {
       name: "lists",
-      description: "Browse all your Albums.",
+      description: "Navegue por todos os seus álbuns.",
       type: ApplicationCommandOptionType.Subcommand,
       options: []
     },
     {
       name: "top",
-      description: "Most popular Albums.",
+      description: "Álbuns mais populares.",
       type: ApplicationCommandOptionType.Subcommand,
       options: []
     }
@@ -108,7 +108,7 @@ module.exports = {
       if (stp === "create") {
         let name = interaction.options.getString('name')
         let public = interaction.options.getBoolean('public')
-        if (!name) return interaction.reply({ content: '⚠️ Enter Album name to create!', ephemeral: true }).catch(e => { })
+        if (!name) return interaction.reply({ content: '⚠️ Digite o nome do álbum para criar!', ephemeral: true }).catch(e => { })
 
         const userplaylist = await db.playlist.findOne({ userID: interaction.user.id })
 
@@ -116,7 +116,7 @@ module.exports = {
         if (playlist?.length > 0) {
           for (let i = 0; i < playlist.length; i++) {
             if (playlist[i]?.playlist?.filter(p => p.name === name)?.length > 0) {
-              return interaction.reply({ content: '⚠️ Album already Exitst!', ephemeral: true }).catch(e => { })
+              return interaction.reply({ content: '⚠️ Álbum já existente!', ephemeral: true }).catch(e => { })
             }
           }
         }
@@ -126,7 +126,7 @@ module.exports = {
         const creatingAlbumEmbed = new EmbedBuilder()
           .setColor('#0099ff')
           .setTitle('Creating Album')
-          .setDescription(`Hey <@${interaction.member.id}>, your album is being created. Rock on! 🎸`)
+          .setDescription(`Hey <@${interaction.member.id}>, seu álbum está sendo criado. Continue! 🎸`)
           .setTimestamp();
 
         // Replying with both content and embed
@@ -134,7 +134,7 @@ module.exports = {
           content: '',
           embeds: [creatingAlbumEmbed]
         }).catch(e => {
-          console.error('Error sending message:', e);
+          console.error('Erro ao enviar mensagem:', e);
         });
 
         await db.playlist.updateOne({ userID: interaction.user.id }, {
@@ -153,11 +153,11 @@ module.exports = {
         const albumCreatedEmbed = new EmbedBuilder()
   .setColor('#00ff00')
           .setAuthor({
-            name: 'Album Created Sucessfully',
+            name: 'Álbum criado com sucesso',
             iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1215554404527116288/7762-verified-blue.gif',
-            url: 'https://discord.gg/FUEHs7RCqz'
+            url: ''
           })
-  .setDescription(`Hey <@${interaction.member.id}>, your album has been created successfully! 🎉`)
+  .setDescription(`Hey <@${interaction.member.id}>, seu álbum foi criado com sucesso! 🎉`)
   .setTimestamp();
 
 // Editing the reply with both content and embed
@@ -165,16 +165,16 @@ await interaction.editReply({
   content: '',
   embeds: [albumCreatedEmbed]
 }).catch(e => {
-  console.error('Error editing reply:', e);
+  console.error('Erro ao editar a resposta:', e);
 });
       }
 
       if (stp === "delete") {
         let name = interaction.options.getString('name')
-        if (!name) return interaction.reply({ content: '⚠️ Enter album name to create!', ephemeral: true }).catch(e => { })
+        if (!name) return interaction.reply({ content: '⚠️ Digite o nome do álbum para criar!', ephemeral: true }).catch(e => { })
 
         const playlist = await db.playlist.findOne({ userID: interaction.user.id }).catch(e => { })
-        if (!playlist?.playlist?.filter(p => p.name === name).length > 0) return interaction.reply({ content: '❌ No album Found', ephemeral: true }).catch(e => { })
+        if (!playlist?.playlist?.filter(p => p.name === name).length > 0) return interaction.reply({ content: '❌Nenhum álbum encontrado', ephemeral: true }).catch(e => { })
 
         const music_filter = playlist?.musics?.filter(m => m.playlist_name === name)
         if (music_filter?.length > 0){
@@ -190,7 +190,7 @@ await interaction.editReply({
        const deletingAlbumEmbed = new EmbedBuilder()
           .setColor('#0099ff')
           .setTitle('Deleting Album')
-          .setDescription(`Hey <@${interaction.member.id}>, your album is being Deleted 🎸`)
+          .setDescription(`Hey <@${interaction.member.id}>, seu álbum está sendo excluído 🎸`)
           .setTimestamp();
 
         // Replying with both content and embed
@@ -212,11 +212,11 @@ await interaction.editReply({
          const albumDeleteEmbed = new EmbedBuilder()
   .setColor('#00ff00')
           .setAuthor({
-            name: 'Album Deleted Sucessfully',
+            name: 'Álbum excluído com sucesso',
             iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1215554404527116288/7762-verified-blue.gif',
-            url: 'https://discord.gg/FUEHs7RCqz'
+            url: ''
           })
-  .setDescription(`Hey <@${interaction.member.id}>, your album has been Deleted successfully! ✨`)
+  .setDescription(`Hey <@${interaction.member.id}>, seu álbum foi excluído com sucesso! ✨`)
   .setTimestamp();
 
 // Editing the reply with both content and embed
@@ -224,18 +224,18 @@ await interaction.editReply({
   content: '',
   embeds: [albumDeleteEmbed]
 }).catch(e => {
-  console.error('Error editing reply:', e);
+  console.error('Erro ao editar a resposta:', e);
 });
       }
 
       if (stp === "add-music") {
         let name = interaction.options.getString('name')
-        if (!name) return interaction.reply({ content: '⚠️ Enter song name to search', ephemeral: true }).catch(e => { })
+        if (!name) return interaction.reply({ content: '⚠️ Digite o nome da música para pesquisar', ephemeral: true }).catch(e => { })
         let playlist_name = interaction.options.getString('playlist-name')
-        if (!playlist_name) return interaction.reply({ content: '⚠️ Enter album name to add songs', ephemeral: true }).catch(e => { })
+        if (!playlist_name) return interaction.reply({ content: '⚠️ Digite o nome do álbum para adicionar músicas', ephemeral: true }).catch(e => { })
 
         const playlist = await db.playlist.findOne({ userID: interaction.user.id }).catch(e => { })
-        if (!playlist?.playlist?.filter(p => p.name === playlist_name).length > 0) return interaction.reply({ content: 'Your Song Added!', ephemeral: true }).catch(e => { })
+        if (!playlist?.playlist?.filter(p => p.name === playlist_name).length > 0) return interaction.reply({ content: 'Sua música adicionada!', ephemeral: true }).catch(e => { })
 
         let max_music = client.config.playlistSettings.maxMusic
         if (playlist?.musics?.filter(m => m.playlist_name === playlist_name).length > max_music) return interaction.reply({ content: "Reached Album songs limit".replace("{max_music}", max_music), ephemeral: true }).catch(e => { })
@@ -255,7 +255,7 @@ await interaction.editReply({
        .setAuthor({
           name: 'Song Added to Your Album',
           iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213430944007061574/6943_Verified.gif',
-          url: 'https://discord.gg/FUEHs7RCqz'
+          url: ''
         })
         .setDescription(`Hey <@${interaction.member.id}>, your song has been Added successfully! ✨`)
         .setFooter({ text: 'YouTube - RTX GAMING' })
@@ -324,7 +324,7 @@ await interaction.editReply({
           .setAuthor({
             name: 'Song Removed Sucessfully',
             iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1215554404527116288/7762-verified-blue.gif',
-            url: 'https://discord.gg/FUEHs7RCqz'
+            url: ''
           })
   .setDescription(`Hey <@${interaction.member.id}>, your song has been Removed successfully! ✨`)
   .setTimestamp();
@@ -404,7 +404,7 @@ await interaction.editReply({
            .setAuthor({
           name: 'Album Songs',
           iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213422313035407360/8218-alert.gif',
-          url: 'https://discord.gg/FUEHs7RCqz'
+          url: ''
         })
             .setThumbnail(interaction.user.displayAvatarURL({ size: 2048, dynamic: true }))
             .setColor(client.config.embedColor) 
@@ -565,7 +565,7 @@ await interaction.editReply({
             .setAuthor({
               name: 'Top Albums',
               iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213422313035407360/8218-alert.gif',
-              url: 'https://discord.gg/FUEHs7RCqz'
+              url: ''
             })
             .setThumbnail(interaction.user.displayAvatarURL({ size: 2048, dynamic: true }))
             .setColor(client.config.embedColor)
@@ -644,12 +644,12 @@ await interaction.editReply({
               .setAuthor({
           name: 'Top Albums',
           iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213422313035407360/8218-alert.gif',
-          url: 'https://discord.gg/FUEHs7RCqz'
+          url: ''
         })
               .setThumbnail(interaction.user.displayAvatarURL({ size: 2048, dynamic: true }))
               .setColor(client.config.embedColor)
               .setDescription('TimeOut!')
-              .setFooter({ text: 'YouTube - RTX GAMING' })
+              .setFooter({ text: 'ww' })
             return interaction.editReply({ embeds: [embed], components: [button] }).catch(e => { })
 
           })
@@ -658,7 +658,7 @@ await interaction.editReply({
       }
     } catch (e) {
       console.error(e);
-      interaction.reply({ content: 'An error occurred while executing this command!', ephemeral: true }).catch(e => { })
+      interaction.reply({ content: 'Ocorreu um erro ao executar este comando!', ephemeral: true }).catch(e => { })
     }
   }
 }
