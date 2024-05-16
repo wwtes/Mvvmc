@@ -34,7 +34,7 @@ module.exports = {
     try {
       const musicCommandsEmbed = new EmbedBuilder()
         .setColor(client.config.embedColor)
-        .setTitle('🎸 **Music Commands**')
+        .setTitle('🎸 **Comandos musicais**')
         .addFields(
           { name: '🎹 Play', value: 'Transmita uma música de um determinado link ou texto de fontes' },
           { name: '⏹️ Stop', value: 'Faz o bot parar de tocar música e sair da voz' },
