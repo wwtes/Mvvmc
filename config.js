@@ -22,20 +22,20 @@
 
 module.exports = {
   TOKEN: "",
-  ownerID: ["1004206704994566164", ""],
+  ownerID: ["1207278369486405632", ""],
   botInvite: "",
   supportServer: "",
   mongodbURL: "mongodb+srv://shiva:shiva@musicbotyt.ouljywv.mongodb.net/?retryWrites=true&w=majority",
-  status: 'GlaceYT',
+  status: 'Mvvmc',
   commandsDir: './commands',
-  language: "en",
+  language: "pt-br",
   embedColor: "00fbff",
   errorLog: "",
 
 
   sponsor: {
     status: true,
-    url: "https://www.youtube.com/@GlaceYT",
+    url: "",
   },
 
   voteManager: {
