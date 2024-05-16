@@ -24,21 +24,21 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
   name: "autoplay",
-  description: "Toggle the autoplay of the queue.",
+  description: "Alternar a reprodução automática da fila.",
   options: [],
   permissions: "0x0000000000000800",
   run: async (client, interaction) => {
     try {
       const queue = client?.player?.getQueue(interaction?.guild?.id);
       if (!queue || !queue?.playing) {
-        return interaction?.reply({ content: '⚠️ No music playing!!', ephemeral: true });
+        return interaction?.reply({ content: '⚠️ Nenhuma música tocando!!', ephemeral: true });
       }
       
       queue?.toggleAutoplay();
       
       const embed = new EmbedBuilder()
         .setColor('#2f58fe')
-        .setTitle('Your Music, Your Call!!')
+        .setTitle('Sua música, sua chamada!!')
         .setDescription(queue?.autoplay ? '**✅ Autoplay ON**' : '**❌ Autoplay OFF**')
         
       
