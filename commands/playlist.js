@@ -154,7 +154,7 @@ module.exports = {
   .setColor('#00ff00')
           .setAuthor({
             name: 'Álbum criado com sucesso',
-            iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1215554404527116288/7762-verified-blue.gif',
+            iconURL: '',
             url: ''
           })
   .setDescription(`Hey <@${interaction.member.id}>, seu álbum foi criado com sucesso! 🎉`)
@@ -323,7 +323,7 @@ await interaction.editReply({
   .setColor('#00ff00')
           .setAuthor({
             name: 'Song Removed Sucessfully',
-            iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1215554404527116288/7762-verified-blue.gif',
+            iconURL: '',
             url: ''
           })
   .setDescription(`Hey <@${interaction.member.id}>, your song has been Removed successfully! ✨`)
@@ -403,7 +403,7 @@ await interaction.editReply({
           return new EmbedBuilder()
            .setAuthor({
           name: 'Album Songs',
-          iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213422313035407360/8218-alert.gif',
+          iconURL: '',
           url: ''
         })
             .setThumbnail(interaction.user.displayAvatarURL({ size: 2048, dynamic: true }))
@@ -500,8 +500,8 @@ await interaction.editReply({
         const embed = new EmbedBuilder()
           .setAuthor({
             name: 'Your Albums',
-            iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213422313035407360/8218-alert.gif',
-            url: 'https://discord.gg/FUEHs7RCqz'
+            iconURL: '',
+            url: ''
           })
           .setColor(client.config.embedColor)
           .setDescription(`\n${playlist?.playlist?.map(data =>
@@ -564,7 +564,7 @@ await interaction.editReply({
           return new EmbedBuilder()
             .setAuthor({
               name: 'Top Albums',
-              iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213422313035407360/8218-alert.gif',
+              iconURL: '',
               url: ''
             })
             .setThumbnail(interaction.user.displayAvatarURL({ size: 2048, dynamic: true }))
@@ -643,7 +643,7 @@ await interaction.editReply({
             const embed = new EmbedBuilder()
               .setAuthor({
           name: 'Top Albums',
-          iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213422313035407360/8218-alert.gif',
+          iconURL: '',
           url: ''
         })
               .setThumbnail(interaction.user.displayAvatarURL({ size: 2048, dynamic: true }))
